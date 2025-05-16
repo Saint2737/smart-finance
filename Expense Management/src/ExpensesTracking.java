@@ -17,22 +17,22 @@ public class ExpensesTracking {
             try (Connection conn = DriverManager.getConnection(JDBC_URL, USER_NAME, PASSWORD) ) {
 
                 String budgetQuery =" SELECT Category, Allocated_amount FROM Budget";
-                String expensesQuery = "SELECT  Category, SUM(Amount_spent) FROM Expenses GROUP BY category";
+                String expensesQuery = "SELECT  Category, SUM(Amount_spent) AS spent FROM Expenses GROUP BY category";
 
                 Statement stmt = conn.createStatement();
                 ResultSet budgetResult = stmt. executeQuery(budgetQuery);
 
-                HashMap<String, Double> BudgetMap = new HashMap<>();
+                HashMap<String, Double> budgetMap = new HashMap<>();
 
                 while(budgetResult.next()){
-                    BudgetMap.put(budgetResult.getString("Category"), budgetResult.getDouble("Allocated_amount"));
+                    budgetMap.put(budgetResult.getString("Category"), budgetResult.getDouble("Allocated_amount"));
 
                 }
 
                 ResultSet expensesResult = stmt. executeQuery(expensesQuery);
                 System.out.println("Comparison of expenses vs budget");
                 System.out.println("-----------------------------------");
-                System.out.printf("category","Budgeted(ksh)","spent(ksh)","status" );
+                System.out.println("category","Budgeted(ksh)","spent(ksh)","status" );
 
                 while (expensesResult.next()){
                     String category = expensesResult.getString("category");
@@ -45,11 +45,14 @@ public class ExpensesTracking {
 
                     } else if (Spent == Budgeted) {
                         status = "On Budget";
-                    } else{
+                    } else if (Spent > (0.5 * Budgeted)){
+                        status ="Half-way Done";
+                    }
+                    else{
                         status = "Under budget";
                     }
 
-                    System.out.println("%-20s,%-15.2f,%-15.2f,%-10s\n, category, budgeted, spent, status");
+                    System.out.printf("%-20s,%-15.2f,%-15.2f,%-10s\n, category, budgeted, spent, status");
 
                 }
             }catch(SQLException e){
