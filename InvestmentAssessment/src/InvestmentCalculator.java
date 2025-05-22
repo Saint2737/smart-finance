@@ -102,7 +102,7 @@ public class InvestmentCalculator {
           System.out.println(" Consider pursuing this investment, but in the future see if you can optimise operations and costs to get a higher return ");
 
       }
-      else if( ROIresult > 10%){
+      else if( ROIresult > 0.10){
           System.out.println("\n The return on investment on this investment is favourable");
           System.out.println(" This investment is highly viable");
           System.out.println("Consider pursuing this investment.");
