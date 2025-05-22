@@ -4,7 +4,7 @@ import java.util.Scanner;
 public class InvestmentCalculator {
     public double ReturnOnInvestment(double currentValue,double InitialValue){
 
-        double ROI = (currentValue - InitialValue)/InitialValue;
+        double ROI = (currentValue - InitialValue)/InitialValue * 100;
         System.out.println("ROI is: "+ ROI + "%");
         return ROI;
     }
@@ -15,7 +15,7 @@ public class InvestmentCalculator {
         return PBP;
     }
     public double AccountingRateReturn(double annualProfit,double averageInvestmentValue){
-        double ARR = (annualProfit - averageInvestmentValue)* 100;
+        double ARR = (annualProfit - averageInvestment)* 100;
         System.out.println("ARR is: " + ARR + "%");
         return ARR;
 
@@ -60,7 +60,7 @@ public class InvestmentCalculator {
           InvestmentCalculator obj = new InvestmentCalculator();
           double ARRresult,PBPresult,ROIresult;
 
-          ARRresult = obj.AccountingRateReturn( annualProfit,averageInvestmentValue);
+          ARRresult = obj.AccountingRateReturn( annualProfit,averageInvestment);
           PBPresult = obj.PaybackPeriod( InitialInvestment,AnnualIncome);
           ROIresult = obj.ReturnOnInvestment( currentValue,InitialValue);
 
@@ -95,6 +95,24 @@ public class InvestmentCalculator {
             System.out.println("  This investment is highly recommended ");
             System.out.println("  Consider pursuing this investment.");
         }
+
+      if (ROIresult >5% && ROIresult <=10%){
+          System.out.println("\n The return on investment on this investment is good and is an average return ");
+          System.out.println("This investment is good for you if you the investment is new");
+          System.out.println(" Consider pursuing this investment, but in the future see if you can optimise operations and costs to get a higher return ");
+
+      }
+      else if( ROIresult > 10%){
+          System.out.println("\n The return on investment on this investment is favourable");
+          System.out.println(" This investment is highly viable");
+          System.out.println("Consider pursuing this investment.");
+
+      }
+      else{
+          System.out.println("\n The return on investment on this investment is not favourable");
+          System.out.println(" This investment is not viable");
+          System.out.println("Consider pursuing another investment or review your investment operations to find ways to optimise and maximize your return");
+      }
 
 
 
