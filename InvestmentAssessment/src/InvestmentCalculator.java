@@ -96,7 +96,7 @@ public class InvestmentCalculator {
             System.out.println("  Consider pursuing this investment.");
         }
 
-      if (ROIresult >5% && ROIresult <=10%){
+      if (ROIresult >0.05 && ROIresult <=0.10){
           System.out.println("\n The return on investment on this investment is good and is an average return ");
           System.out.println("This investment is good for you if you the investment is new");
           System.out.println(" Consider pursuing this investment, but in the future see if you can optimise operations and costs to get a higher return ");
